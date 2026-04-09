@@ -1,0 +1,772 @@
+@import "tailwindcss";
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --brand: #C4FDF6;
+  --bg: #000;
+}
+
+html, body {
+  width: 100%; height: 100%;
+  background: var(--bg);
+  color: var(--brand);
+  overflow: hidden;
+}
+
+/* ── ASCII canvas background ── */
+#ascii-bg {
+  position: fixed;
+  inset: 0;
+  font-family: 'Fira Code', monospace;
+  font-size: 13px;
+  line-height: 1.4;
+  color: var(--brand);
+  opacity: 0;
+  pointer-events: none;
+  overflow: hidden;
+  white-space: pre;
+  z-index: 0;
+}
+
+/* ── Page: full viewport, position children absolutely ── */
+.page {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* ── Hero: centred via margin:auto (no transform, avoids animation conflict) ── */
+.hero {
+  position: absolute;
+  inset: 0;
+  width: fit-content;
+  height: fit-content;
+  margin: auto;
+  margin-bottom: 46vh;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.39vw;
+  animation: fadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both;
+}
+
+.logo {
+  display: flex;
+  align-items: baseline;
+  gap: 0.35em;
+}
+
+/* Figma: fontSize 46.98px on 1440px = 3.26vw */
+.logo-word {
+  font-family: 'Funnel Sans', sans-serif;
+  font-style: italic;
+  font-weight: 700;
+  font-size: 3.26vw;
+  color: var(--brand);
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+.logo-glyph {
+  font-family: 'Funnel Sans', sans-serif;
+  font-weight: 400;
+  font-size: 3.26vw;
+  color: var(--brand);
+  display: inline-block;
+  line-height: 1;
+}
+
+/* Figma: fontSize 27.15px on 1440px = 1.885vw */
+/* Figma box: 209.25 × 55.23px — no explicit border in spec */
+.enter-link {
+  font-family: 'Fira Code', monospace;
+  font-weight: 24;
+  font-size: 1.25vw;
+  color: var(--brand);
+  text-decoration: none;
+  letter-spacing: 0.1em;
+  display: inline-block;
+  text-align: center;
+}
+
+/* ── Icon color masks — background fills with var(--brand) automatically ── */
+.icon-mask-main {
+  background-color: var(--brand);
+  -webkit-mask-image: url('/iconmain.png');
+  mask-image: url('/iconmain.png');
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+}
+
+.icon-mask-arrow {
+  background-color: var(--brand);
+  -webkit-mask-image: url('/Arrowstandard.png');
+  mask-image: url('/Arrowstandard.png');
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+}
+
+.arrow-icon {
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+}
+.arrow-right { transform: rotate(-90deg); }
+.arrow-left  { transform: rotate(90deg); }
+.arrow-up    { transform: rotate(180deg); }
+
+/* ── Bottom: pinned near the bottom of the viewport ── */
+/* Figma: About 788.49px, gap 86px, Play 242.19px (total 1116.68px) */
+.bottom {
+  position: absolute;
+  top: 62vh;
+  left: 11.24vw;
+  right: 11.24vw;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 840fr 320fr;
+  column-gap: 5vw;
+  animation: fadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) 0.6s both;
+}
+
+/* About block — weight 400 throughout, "About" inline */
+/* Figma: fontSize 10.44px on 1440px = 0.725vw */
+.about-block {
+  font-family: 'Fira Code', monospace;
+  font-weight: 320;
+  font-size: 0.75vw;
+  line-height: 1.85;
+  color: var(--brand);
+  white-space: pre-line;
+}
+
+/* Play block */
+.play-block {
+  font-family: 'Fira Code', monospace;
+  font-size: 0.75vw;
+  line-height: 1.85;
+  color: var(--brand);
+  white-space: pre-line;
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  text-align: left;
+}
+
+.about-label {
+  font-weight: 1000;
+  margin-bottom: 0.25em; /* padding under about label */
+}
+
+.play-label {
+  font-weight: 1000;
+  margin-bottom: 0.75em; /* padding under play label */
+}
+.play-body  { font-weight: 320; }
+
+.play-block .enter-link {
+  --enter-link-top-gap: 2.5em;    /* padding under play block / above enter site */
+  --enter-link-arrow-gap: 0.5em; /* space between arrow and ENTER SITE text */
+  margin-top: var(--enter-link-top-gap);
+  align-self: flex-end;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--enter-link-arrow-gap);
+}
+
+
+/* ── Animations ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ════════════════════════════════════════
+   MAIN PAGE (post-landing)
+   ════════════════════════════════════════ */
+
+.main-layout {
+  display: grid;
+  grid-template-columns: 320px 84px 1fr;
+  height: 100vh;
+  overflow: hidden;
+  background: #000;
+}
+
+/* ── Left Sidebar ── */
+.sidebar {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 64px 32px 132px; /* bottom padding keeps about section above footer */
+  border-right: 2.5px solid rgba(196,253,246,0.15);
+  overflow: hidden;
+}
+
+.sidebar-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 28px 0 28px;
+  margin-bottom: 0;
+}
+
+.sidebar-icon {
+  width: 60px;
+  height: 60px;
+}
+
+.sidebar-logo {
+  font-family: 'Funnel Sans', sans-serif;
+  font-style: italic;
+  font-weight: 700;
+  font-size: 50px;
+  color: var(--brand);
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+.sidebar-rule {
+  border: none;
+  border-top: 2.5px solid rgba(196,253,246,0.25);
+  margin: 0 -32px 14px;
+}
+
+.sidebar-section {
+  margin-bottom: 32px;
+}
+
+.sidebar-play-section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding-top: 10px;    /* space between top rule and play content */
+  padding-bottom: 30px; /* space between play content and bottom rule */
+  margin-bottom: 0;
+}
+
+.sidebar-heading {
+  font-family: 'Fira Code', monospace;
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--brand);
+  margin-bottom: 8px;
+}
+
+.sidebar-play-label {
+  font-family: 'Fira Code', monospace;
+  font-size: 12px;    /* play label size */
+  font-weight: 700;   /* play label weight */
+  color: var(--brand);
+  margin-bottom: 10px; /* play label bottom padding */
+}
+
+.sidebar-play-text {
+  font-family: 'Fira Code', monospace;
+  font-size: 12px;  /* play body size */
+  font-weight: 400;   /* play body weight */
+  line-height: 1.75;
+  color: var(--brand);
+}
+
+.sidebar-about-label {
+  font-family: 'Fira Code', monospace;
+  font-size: 10px;    /* about label size */
+  font-weight: 400;   /* about label weight */
+  color: var(--brand);
+  margin-bottom: 10px; /* about label bottom padding */
+}
+
+.sidebar-about-text {
+  font-family: 'Fira Code', monospace;
+  font-size: 11.5px;  /* about body size */
+  font-weight: 400;   /* about body weight */
+  line-height: 1.75;
+  color: var(--brand);
+}
+
+.sidebar-footer {
+  position: absolute;
+  bottom: 24px; /* footer bottom padding */
+  left: 32px;
+  right: 32px;
+  display: flex;
+  justify-content: space-between;
+  font-family: 'Fira Code', monospace;
+  font-size: 10px;
+  color: rgba(196,253,246,0.5);
+}
+
+/* ── Middle column ── */
+.mid-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 0 20px;
+  border-right: 2.5px solid rgba(196,253,246,0.15);
+  gap: 16px;
+}
+
+.mid-back {
+  background: none;
+  border: none;
+  color: var(--brand);
+  font-size: 48px;
+  cursor: pointer;
+  padding: 0;
+  line-height: 1;
+  font-family: 'Fira Code', monospace;
+}
+.mid-back:hover { opacity: 0.7; }
+
+.mid-label {
+  font-family: 'Fira Code', monospace;
+  font-weight: 400;
+  color: var(--brand);
+  letter-spacing: 0.15em;
+  writing-mode: vertical-lr;
+}
+
+.mid-about {
+  font-size: 32px;
+  font-weight: 300;
+  letter-spacing: 0;
+}
+
+.mid-click {
+  font-size: 18px;
+}
+
+.mid-color-label {
+  font-family: 'Fira Code', monospace;
+  font-size: 8px;
+  font-weight: 300;
+  color: var(--brand);
+  letter-spacing: 0.08em;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.arrow-back {
+  width: 28px;
+  height: 28px;
+}
+
+.arrow-clickme {
+  width: 24px;
+  height: 24px;
+}
+
+.mid-icon {
+  width: 45px;
+  height: 45px;
+  margin-top: 32px;
+  margin-bottom: 12px;
+  cursor: pointer;
+}
+.mid-icon.spinning {
+  animation: mid-icon-click 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+@keyframes mid-icon-hover {
+  from { transform: scale(1); }
+  to   { transform: scale(0.91); }
+}
+
+@keyframes mid-icon-click {
+  0%   { transform: rotate(0deg)   scale(1); }
+  30%  { transform: rotate(-15deg) scale(0.93); }
+  65%  { transform: rotate(4deg)   scale(1.05); }
+  82%  { transform: rotate(-2deg)  scale(1.01); }
+  100% { transform: rotate(0deg)   scale(1); }
+}
+
+/* ── Main ASCII video area ── */
+.video-area {
+  position: relative;
+  background: #3a3a3a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* ── ASCII renderer canvas (fills entire video-area) ── */
+.ascii-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  pointer-events: none;
+}
+
+/* ── Right stack: webcam + params panel, top-right of gray area ── */
+.right-stack {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 320px;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* ── Webcam widget ── */
+.webcam-wrapper {
+  width: 100%;
+  border: 1px solid rgba(196,253,246,0.25);
+  border-radius: 3px;
+  overflow: hidden;
+  background: #111;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Bar above the camera frame — spans full width, X on the right */
+.webcam-topbar {
+  width: 100%;
+  height: 28px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0 8px;
+  border-bottom: 1px solid rgba(196,253,246,0.15);
+  background: #111;
+}
+
+/* 16:9 camera/prompt area */
+.webcam-body {
+  aspect-ratio: 16 / 9;
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+}
+
+.webcam-canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* Centered prompt (idle / loading / error) */
+.webcam-prompt {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  padding: 16px;
+}
+
+.webcam-prompt-text {
+  font-family: 'Fira Code', monospace;
+  font-size: 11.5px;
+  font-weight: 400;
+  color: var(--brand);
+  opacity: 1;
+  text-align: center;
+  line-height: 1.6;
+  letter-spacing: 0.04em;
+}
+
+.webcam-open-btn {
+  background: none;
+  border: 1px solid var(--brand);
+  color: var(--brand);
+  font-family: 'Fira Code', monospace;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  padding: 6px 10px;
+  cursor: pointer;
+  border-radius: 1.5px;
+  opacity: 1;
+  transition: opacity 0.15s;
+}
+.webcam-open-btn:hover { opacity: 1; }
+
+/* X in the topbar */
+.webcam-close-btn {
+  background: none;
+  border: none;
+  color: var(--brand);
+  font-family: 'Fira Code', monospace;
+  font-size: 12px;
+  cursor: pointer;
+  opacity: 1;
+  padding: 2px 4px;
+  line-height: 1;
+  transition: opacity 0.15s;
+}
+.webcam-close-btn:hover { opacity: 1; }
+
+/* ══════════════════════════════════════
+   PARAMETERS PANEL
+   ══════════════════════════════════════ */
+
+.params-panel {
+  width: 100%;
+  background: #000;
+  border: 1px solid rgba(196,253,246,0.2);
+}
+
+/* Header row */
+.params-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 20px 18px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.params-title {
+  font-family: 'Fira Code', monospace;
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--brand);
+  letter-spacing: 0.02em;
+}
+
+.params-chevron {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+
+/* Body */
+.params-body {
+  padding: 0 20px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Generic label row */
+.params-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 22px;
+}
+.params-row-top { align-items: flex-start; }
+
+.params-label {
+  font-family: 'Fira Code', monospace;
+  font-size: 11px;
+  font-weight: 400;
+  color: var(--brand);
+  letter-spacing: 0.02em;
+  flex-shrink: 0;
+}
+
+/* ── Pixel size: label+value row above slider ── */
+.params-slider-block {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.params-value {
+  font-family: 'Fira Code', monospace;
+  font-size: 11px;
+  color: var(--brand);
+  opacity: 1;
+  letter-spacing: 0.04em;
+}
+.params-slider {
+  width: 100%;
+  -webkit-appearance: none;
+  appearance: none;
+  height: 2px;
+  background: rgba(196,253,246,0.2);
+  outline: none;
+  cursor: pointer;
+  border-radius: 1px;
+}
+.params-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: var(--brand);
+  cursor: pointer;
+  transition: transform 0.1s;
+}
+.params-slider::-webkit-slider-thumb:hover { transform: scale(1.25); }
+.params-slider::-moz-range-thumb {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: var(--brand);
+  border: none;
+  cursor: pointer;
+}
+
+/* ── Toggle dot (Pixel Background) ── */
+.params-toggle-dot {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  border: 1.5px solid var(--brand);
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+  flex-shrink: 0;
+  transition: background 0.15s;
+}
+.params-toggle-dot.on { background: var(--brand); }
+
+/* ── Color swatches ── */
+.params-color-row {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+.params-color-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: transparent;
+  border: 1.5px solid var(--dot-color);
+  cursor: pointer;
+  padding: 0;
+  flex-shrink: 0;
+  outline: none;
+  transition: background 0.12s;
+}
+.params-color-dot.selected {
+  background: var(--dot-color);
+}
+
+/* ── Character style radios ── */
+.params-radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.params-radio {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+.params-radio-pip {
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  border: 1.5px solid var(--brand);
+  background: transparent;
+  flex-shrink: 0;
+  transition: background 0.12s;
+}
+.params-radio.selected .params-radio-pip {
+  background: var(--brand);
+}
+.params-radio-text {
+  font-family: 'Fira Code', monospace;
+  font-size: 13px;
+  color: var(--brand);
+  letter-spacing: 0.02em;
+  text-align: left;
+  min-width: 64px;
+}
+
+/* ── Upload video icon button ── */
+.params-upload-btn {
+  background: none;
+  border: none;
+  color: var(--brand);
+  cursor: pointer;
+  padding: 2px 4px;
+  display: flex;
+  align-items: center;
+  opacity: 1;
+  transition: opacity 0.15s;
+}
+.params-upload-btn:hover { opacity: 1; }
+
+/* ── Pause button ── */
+.params-pause {
+  background: none;
+  border: 1px solid var(--brand);
+  color: var(--brand);
+  font-family: 'Fira Code', monospace;
+  font-size: 13px;
+  letter-spacing: 0.1em;
+  padding: 8px 28px;
+  cursor: pointer;
+  align-self: flex-start;
+  transition: opacity 0.15s;
+}
+.params-pause:hover { opacity: 0.7; }
+
+/* ── Bottom: upload + share ── */
+.params-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 16px;
+  border-top: 1px solid rgba(196,253,246,0.15);
+  margin-top: 2px;
+}
+.params-share {
+  background: none;
+  border: none;
+  color: var(--brand);
+  font-family: 'Fira Code', monospace;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  padding: 2px 4px;
+  transition: opacity 0.15s;
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  max-width: 100%;
+  text-align: left;
+}
+.params-share:hover { opacity: 0.7; }
+
+.params-share-status {
+  font-size: 10px;
+  letter-spacing: 0.04em;
+  opacity: 0.85;
+  text-transform: uppercase;
+}
+
+/* ── Scanline subtle overlay ── */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0,0,0,0.03) 2px,
+    rgba(0,0,0,0.03) 4px
+  );
+  pointer-events: none;
+  z-index: 100;
+}
