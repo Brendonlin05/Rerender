@@ -32,9 +32,9 @@ export default function RotatePrompt({ children }: { children: React.ReactNode }
             <path d="M20 18 Q22 10 29 16" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" fill="none"/>
             <path d="M29 16 L25 14 M29 16 L31 20" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/>
           </svg>
+          <p className="rotate-overlay-title">Access on computer for the full experience.</p>
           <p className="rotate-overlay-title">Rotate your device</p>
           <p className="rotate-overlay-body">This experience is designed for landscape mode</p>
-          <p className="rotate-overlay-body">Access on computer for the full experience.</p>
         </div>
       </div>
     )

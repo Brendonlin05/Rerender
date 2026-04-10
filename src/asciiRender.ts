@@ -15,7 +15,6 @@ export const CHAR_SETS: Record<string, string[]> = {
   Minimal: [' ', '.', ':', '-', '=', '+', '*', '#', '%', '@'],
 }
 
-/** Must match MainPage initial `videoSrc` — this clip fills the canvas; uploads use contain + bars. */
 export const DEFAULT_VIDEO_SRC = '/defaultscene.mp4'
 
 export function cyclingChar(phase: number, chars: string[]): string {
