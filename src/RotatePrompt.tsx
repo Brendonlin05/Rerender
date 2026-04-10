@@ -21,7 +21,14 @@ export default function RotatePrompt({ children }: { children: React.ReactNode }
     return (
       <div className="rotate-overlay">
         <div className="rotate-overlay-inner">
-          <div className="rotate-overlay-icon icon-mask-main" aria-hidden="true" />
+          <svg className="rotate-overlay-icon" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect x="6" y="8" width="20" height="34" rx="3" stroke="currentColor" strokeWidth="2.2" opacity="0.45"/>
+            <circle cx="16" cy="37" r="1.8" fill="currentColor" opacity="0.45"/>
+            <rect x="24" y="22" width="34" height="20" rx="3" stroke="currentColor" strokeWidth="2.2"/>
+            <circle cx="53" cy="32" r="1.8" fill="currentColor"/>
+            <path d="M20 18 Q22 10 29 16" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" fill="none"/>
+            <path d="M29 16 L25 14 M29 16 L31 20" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
           <p className="rotate-overlay-title">Access on computer for the full experience.</p>
           <p className="rotate-overlay-body">Rotate your device.</p>
           <p className="rotate-overlay-body">This experience is designed for landscape mode.</p>

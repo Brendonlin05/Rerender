@@ -785,12 +785,15 @@ html, body {
 .rotate-overlay-icon {
   width: 72px;
   height: 72px;
-  animation: rotate-spin 2s linear infinite;
+  color: var(--brand);
+  animation: rotate-hint 3s ease-in-out infinite;
 }
 
-@keyframes rotate-spin {
-  from { transform: rotate(0deg); }
-  to   { transform: rotate(360deg); }
+@keyframes rotate-hint {
+  0%   { transform: rotate(0deg); }
+  40%  { transform: rotate(0deg); }
+  75%  { transform: rotate(-90deg); }
+  100% { transform: rotate(-90deg); }
 }
 
 .rotate-overlay-title {
