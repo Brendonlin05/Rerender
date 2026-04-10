@@ -1,8 +1,12 @@
 import LandingPage from './LandingPage'
 import MainPage from './MainPage'
+import RotatePrompt from './RotatePrompt'
 
 export default function App() {
   const path = window.location.pathname
-  if (path === '/app') return <MainPage />
-  return <LandingPage />
+  return (
+    <RotatePrompt>
+      {path === '/app' ? <MainPage /> : <LandingPage />}
+    </RotatePrompt>
+  )
 }

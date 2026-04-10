@@ -63,7 +63,7 @@ html, body {
   font-family: 'Funnel Sans', sans-serif;
   font-style: italic;
   font-weight: 700;
-  font-size: 3.26vw;
+  font-size: clamp(22px, 3.26vw, 47px);
   color: var(--brand);
   letter-spacing: -0.02em;
   line-height: 1;
@@ -72,7 +72,7 @@ html, body {
 .logo-glyph {
   font-family: 'Funnel Sans', sans-serif;
   font-weight: 400;
-  font-size: 3.26vw;
+  font-size: clamp(22px, 3.26vw, 47px);
   color: var(--brand);
   display: inline-block;
   line-height: 1;
@@ -83,7 +83,7 @@ html, body {
 .enter-link {
   font-family: 'Fira Code', monospace;
   font-weight: 24;
-  font-size: 1.25vw;
+  font-size: clamp(12px, 1.25vw, 18px);
   color: var(--brand);
   text-decoration: none;
   letter-spacing: 0.1em;
@@ -144,7 +144,7 @@ html, body {
 .about-block {
   font-family: 'Fira Code', monospace;
   font-weight: 320;
-  font-size: 0.75vw;
+  font-size: clamp(9.5px, 0.75vw, 12px);
   line-height: 1.85;
   color: var(--brand);
   white-space: pre-line;
@@ -153,7 +153,7 @@ html, body {
 /* Play block */
 .play-block {
   font-family: 'Fira Code', monospace;
-  font-size: 0.75vw;
+  font-size: clamp(9.5px, 0.75vw, 12px);
   line-height: 1.85;
   color: var(--brand);
   white-space: pre-line;
@@ -197,7 +197,7 @@ html, body {
 
 .main-layout {
   display: grid;
-  grid-template-columns: 320px 84px 1fr;
+  grid-template-columns: clamp(150px, 22.2vw, 320px) clamp(48px, 5.83vw, 84px) 1fr;
   height: 100vh;
   overflow: hidden;
   background: #000;
@@ -208,30 +208,32 @@ html, body {
   position: relative;
   display: flex;
   flex-direction: column;
-  padding: 64px 32px 132px; /* bottom padding keeps about section above footer */
+  padding: clamp(24px, 4.4vw, 64px) clamp(12px, 2.22vw, 32px) clamp(16px, 1.67vw, 24px);
   border-right: 2.5px solid rgba(196,253,246,0.15);
-  overflow: hidden;
+  overflow-y: auto;
+  scrollbar-width: none;
 }
+.sidebar::-webkit-scrollbar { display: none; }
 
 .sidebar-header {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10px;
-  padding: 28px 0 28px;
+  gap: clamp(4px, 0.7vw, 10px);
+  padding: clamp(12px, 1.94vw, 28px) 0;
   margin-bottom: 0;
 }
 
 .sidebar-icon {
-  width: 60px;
-  height: 60px;
+  width:  clamp(28px, 4.17vw, 60px);
+  height: clamp(28px, 4.17vw, 60px);
 }
 
 .sidebar-logo {
   font-family: 'Funnel Sans', sans-serif;
   font-style: italic;
   font-weight: 700;
-  font-size: 50px;
+  font-size: clamp(20px, 3.47vw, 50px);
   color: var(--brand);
   letter-spacing: -0.02em;
   line-height: 1;
@@ -240,11 +242,11 @@ html, body {
 .sidebar-rule {
   border: none;
   border-top: 2.5px solid rgba(196,253,246,0.25);
-  margin: 0 -32px 14px;
+  margin: 0 calc(-1 * clamp(12px, 2.22vw, 32px)) 14px;
 }
 
 .sidebar-section {
-  margin-bottom: 32px;
+  margin-bottom: clamp(16px, 2.2vw, 32px);
 }
 
 .sidebar-play-section {
@@ -258,7 +260,7 @@ html, body {
 
 .sidebar-heading {
   font-family: 'Fira Code', monospace;
-  font-size: 10px;
+  font-size: clamp(7px, 0.69vw, 10px);
   font-weight: 700;
   color: var(--brand);
   margin-bottom: 8px;
@@ -266,46 +268,44 @@ html, body {
 
 .sidebar-play-label {
   font-family: 'Fira Code', monospace;
-  font-size: 12px;    /* play label size */
-  font-weight: 700;   /* play label weight */
+  font-size: clamp(9px, 0.83vw, 12px);
+  font-weight: 700;
   color: var(--brand);
-  margin-bottom: 10px; /* play label bottom padding */
+  margin-bottom: 10px;
 }
 
 .sidebar-play-text {
   font-family: 'Fira Code', monospace;
-  font-size: 12px;  /* play body size */
-  font-weight: 400;   /* play body weight */
+  font-size: clamp(8px, 0.83vw, 12px);
+  font-weight: 400;
   line-height: 1.75;
   color: var(--brand);
 }
 
 .sidebar-about-label {
   font-family: 'Fira Code', monospace;
-  font-size: 10px;    /* about label size */
-  font-weight: 400;   /* about label weight */
+  font-size: clamp(8px, 0.69vw, 10px);
+  font-weight: 400;
   color: var(--brand);
-  margin-bottom: 10px; /* about label bottom padding */
+  margin-bottom: 10px;
 }
 
 .sidebar-about-text {
   font-family: 'Fira Code', monospace;
-  font-size: 11.5px;  /* about body size */
-  font-weight: 400;   /* about body weight */
+  font-size: clamp(8px, 0.80vw, 11.5px);
+  font-weight: 400;
   line-height: 1.75;
   color: var(--brand);
 }
 
 .sidebar-footer {
-  position: absolute;
-  bottom: 24px; /* footer bottom padding */
-  left: 32px;
-  right: 32px;
   display: flex;
   justify-content: space-between;
   font-family: 'Fira Code', monospace;
-  font-size: 10px;
+  font-size: clamp(7px, 0.69vw, 10px);
   color: rgba(196,253,246,0.5);
+  padding-top: clamp(16px, 1.67vw, 24px);
+  margin-top: auto;
 }
 
 /* ── Middle column ── */
@@ -313,16 +313,16 @@ html, body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 20px 0 20px;
+  padding: clamp(14px, 1.5vw, 20px) 0;
   border-right: 2.5px solid rgba(196,253,246,0.15);
-  gap: 16px;
+  gap: clamp(8px, 1.1vw, 16px);
 }
 
 .mid-back {
   background: none;
   border: none;
   color: var(--brand);
-  font-size: 48px;
+  font-size: clamp(24px, 3.33vw, 48px);
   cursor: pointer;
   padding: 0;
   line-height: 1;
@@ -339,13 +339,13 @@ html, body {
 }
 
 .mid-about {
-  font-size: 32px;
+  font-size: clamp(16px, 2.22vw, 32px);
   font-weight: 300;
   letter-spacing: 0;
 }
 
 .mid-click {
-  font-size: 18px;
+  font-size: clamp(10px, 1.25vw, 18px);
 }
 
 .mid-color-label {
@@ -359,20 +359,20 @@ html, body {
 }
 
 .arrow-back {
-  width: 28px;
-  height: 28px;
+  width:  clamp(16px, 1.94vw, 28px);
+  height: clamp(16px, 1.94vw, 28px);
 }
 
 .arrow-clickme {
-  width: 24px;
-  height: 24px;
+  width:  clamp(13px, 1.67vw, 24px);
+  height: clamp(13px, 1.67vw, 24px);
 }
 
 .mid-icon {
-  width: 45px;
-  height: 45px;
-  margin-top: 32px;
-  margin-bottom: 12px;
+  width:  clamp(26px, 3.13vw, 45px);
+  height: clamp(26px, 3.13vw, 45px);
+  margin-top:    clamp(14px, 2.2vw,  32px);
+  margin-bottom: clamp(6px,  0.83vw, 12px);
   cursor: pointer;
 }
 .mid-icon.spinning {
@@ -415,9 +415,9 @@ html, body {
 /* ── Right stack: webcam + params panel, top-right of gray area ── */
 .right-stack {
   position: absolute;
-  top: 20px;
-  right: 20px;
-  width: 320px;
+  top:   clamp(12px, 1.5vw, 20px);
+  right: clamp(12px, 1.5vw, 20px);
+  width: clamp(180px, 22.2vw, 320px);
   z-index: 10;
   display: flex;
   flex-direction: column;
@@ -530,7 +530,7 @@ html, body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 20px 20px 18px;
+  padding: clamp(10px, 1.39vw, 20px) clamp(10px, 1.39vw, 20px) clamp(8px, 1.25vw, 18px);
   cursor: pointer;
   user-select: none;
 }
@@ -538,7 +538,7 @@ html, body {
 .params-title {
   font-family: 'Fira Code', monospace;
   font-weight: 700;
-  font-size: 14px;
+  font-size: clamp(10px, 0.97vw, 14px);
   color: var(--brand);
   letter-spacing: 0.02em;
 }
@@ -552,10 +552,10 @@ html, body {
 
 /* Body */
 .params-body {
-  padding: 0 20px 20px;
+  padding: 0 clamp(10px, 1.39vw, 20px) clamp(10px, 1.39vw, 20px);
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: clamp(8px, 1.11vw, 16px);
 }
 
 /* Generic label row */
@@ -569,7 +569,7 @@ html, body {
 
 .params-label {
   font-family: 'Fira Code', monospace;
-  font-size: 11px;
+  font-size: clamp(8px, 0.76vw, 11px);
   font-weight: 400;
   color: var(--brand);
   letter-spacing: 0.02em;
@@ -584,7 +584,7 @@ html, body {
 }
 .params-value {
   font-family: 'Fira Code', monospace;
-  font-size: 11px;
+  font-size: clamp(8px, 0.76vw, 11px);
   color: var(--brand);
   opacity: 1;
   letter-spacing: 0.04em;
@@ -684,7 +684,7 @@ html, body {
 }
 .params-radio-text {
   font-family: 'Fira Code', monospace;
-  font-size: 13px;
+  font-size: clamp(9px, 0.90vw, 13px);
   color: var(--brand);
   letter-spacing: 0.02em;
   text-align: left;
@@ -711,9 +711,9 @@ html, body {
   border: 1px solid var(--brand);
   color: var(--brand);
   font-family: 'Fira Code', monospace;
-  font-size: 13px;
+  font-size: clamp(10px, 0.90vw, 13px);
   letter-spacing: 0.1em;
-  padding: 8px 28px;
+  padding: clamp(5px, 0.56vw, 8px) clamp(14px, 1.94vw, 28px);
   cursor: pointer;
   align-self: flex-start;
   transition: opacity 0.15s;
@@ -734,7 +734,7 @@ html, body {
   border: none;
   color: var(--brand);
   font-family: 'Fira Code', monospace;
-  font-size: 12px;
+  font-size: clamp(9px, 0.83vw, 12px);
   letter-spacing: 0.06em;
   cursor: pointer;
   padding: 2px 4px;
@@ -753,6 +753,106 @@ html, body {
   letter-spacing: 0.04em;
   opacity: 0.85;
   text-transform: uppercase;
+}
+
+/* ════════════════════════════════════════
+   ROTATE OVERLAY (portrait mobile)
+   ════════════════════════════════════════ */
+
+.rotate-overlay {
+  position: fixed;
+  inset: 0;
+  background: var(--bg);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.rotate-overlay-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  padding: 32px;
+  text-align: center;
+}
+
+.rotate-overlay-icon {
+  width: 72px;
+  height: 72px;
+  color: var(--brand);
+  animation: rotate-hint 3s ease-in-out infinite;
+}
+
+@keyframes rotate-hint {
+  0%   { transform: rotate(0deg); }
+  40%  { transform: rotate(0deg); }
+  75%  { transform: rotate(-90deg); }
+  100% { transform: rotate(-90deg); }
+}
+
+.rotate-overlay-title {
+  font-family: 'Fira Code', monospace;
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--brand);
+  letter-spacing: 0.08em;
+}
+
+.rotate-overlay-body {
+  font-family: 'Fira Code', monospace;
+  font-size: 11px;
+  color: var(--brand);
+  opacity: 0.6;
+  letter-spacing: 0.04em;
+  max-width: 220px;
+  line-height: 1.65;
+}
+
+/* ── Sub-900px (mobile landscape): reflow landing page ── */
+@media (max-width: 900px) {
+  /* Allow page to grow and scroll when content exceeds viewport height */
+  html, body { overflow-y: auto; }
+
+  .page {
+    height: auto;
+    min-height: 100vh;
+    overflow: visible;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(16px, 3vh, 40px);
+    padding: clamp(20px, 4vh, 48px) clamp(24px, 8vw, 11.24vw);
+  }
+
+  .hero {
+    position: static;
+    inset: auto;
+    width: auto;
+    height: auto;
+    margin: 0;
+    align-self: center;
+    gap: clamp(8px, 1.5vw, 20px);
+  }
+
+  .bottom {
+    position: static;
+    top: auto;
+    left: auto;
+    right: auto;
+    width: 100%;
+    column-gap: clamp(16px, 4vw, 5vw);
+  }
+}
+
+/* ── Sub-600px: stack landing columns vertically ── */
+@media (max-width: 600px) {
+  .bottom {
+    grid-template-columns: 1fr;
+    row-gap: 20px;
+  }
 }
 
 /* ── Scanline subtle overlay ── */
