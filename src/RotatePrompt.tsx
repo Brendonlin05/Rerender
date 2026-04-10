@@ -34,6 +34,7 @@ export default function RotatePrompt({ children }: { children: React.ReactNode }
           </svg>
           <p className="rotate-overlay-title">Rotate your device</p>
           <p className="rotate-overlay-body">This experience is designed for landscape mode</p>
+          <p className="rotate-overlay-body">Access on computer for the full experience.</p>
         </div>
       </div>
     )

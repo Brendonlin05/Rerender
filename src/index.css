@@ -544,8 +544,8 @@ html, body {
 }
 
 .params-chevron {
-  width: 18px;
-  height: 18px;
+  width:  clamp(13px, 1.25vw, 18px);
+  height: clamp(13px, 1.25vw, 18px);
   flex-shrink: 0;
   transition: transform 0.2s ease;
 }
@@ -563,7 +563,7 @@ html, body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  min-height: 22px;
+  min-height: clamp(16px, 1.53vw, 22px);
 }
 .params-row-top { align-items: flex-start; }
 
@@ -580,7 +580,7 @@ html, body {
 .params-slider-block {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: clamp(4px, 0.42vw, 6px);
 }
 .params-value {
   font-family: 'Fira Code', monospace;
@@ -602,8 +602,8 @@ html, body {
 .params-slider::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
-  width: 11px;
-  height: 11px;
+  width:  clamp(8px, 0.76vw, 11px);
+  height: clamp(8px, 0.76vw, 11px);
   border-radius: 50%;
   background: var(--brand);
   cursor: pointer;
@@ -611,8 +611,8 @@ html, body {
 }
 .params-slider::-webkit-slider-thumb:hover { transform: scale(1.25); }
 .params-slider::-moz-range-thumb {
-  width: 11px;
-  height: 11px;
+  width:  clamp(8px, 0.76vw, 11px);
+  height: clamp(8px, 0.76vw, 11px);
   border-radius: 50%;
   background: var(--brand);
   border: none;
@@ -621,8 +621,8 @@ html, body {
 
 /* ── Toggle dot (Pixel Background) ── */
 .params-toggle-dot {
-  width: 11px;
-  height: 11px;
+  width:  clamp(8px, 0.76vw, 11px);
+  height: clamp(8px, 0.76vw, 11px);
   border-radius: 50%;
   border: 1.5px solid var(--brand);
   background: transparent;
@@ -637,11 +637,11 @@ html, body {
 .params-color-row {
   display: flex;
   align-items: center;
-  gap: 7px;
+  gap: clamp(4px, 0.49vw, 7px);
 }
 .params-color-dot {
-  width: 14px;
-  height: 14px;
+  width:  clamp(10px, 0.97vw, 14px);
+  height: clamp(10px, 0.97vw, 14px);
   border-radius: 50%;
   background: transparent;
   border: 1.5px solid var(--dot-color);
@@ -659,20 +659,20 @@ html, body {
 .params-radio-group {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: clamp(4px, 0.42vw, 6px);
 }
 .params-radio {
   display: flex;
   align-items: center;
-  gap: 9px;
+  gap: clamp(6px, 0.63vw, 9px);
   background: none;
   border: none;
   cursor: pointer;
   padding: 0;
 }
 .params-radio-pip {
-  width: 13px;
-  height: 13px;
+  width:  clamp(9px, 0.90vw, 13px);
+  height: clamp(9px, 0.90vw, 13px);
   border-radius: 50%;
   border: 1.5px solid var(--brand);
   background: transparent;
@@ -688,7 +688,7 @@ html, body {
   color: var(--brand);
   letter-spacing: 0.02em;
   text-align: left;
-  min-width: 64px;
+  min-width: clamp(44px, 4.44vw, 64px);
 }
 
 /* ── Upload video icon button ── */
@@ -704,6 +704,10 @@ html, body {
   transition: opacity 0.15s;
 }
 .params-upload-btn:hover { opacity: 1; }
+.params-upload-btn svg {
+  width:  clamp(13px, 1.25vw, 18px);
+  height: clamp(13px, 1.25vw, 18px);
+}
 
 /* ── Pause button ── */
 .params-pause {
@@ -725,7 +729,7 @@ html, body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-top: 16px;
+  padding-top: clamp(10px, 1.11vw, 16px);
   border-top: 1px solid rgba(196,253,246,0.15);
   margin-top: 2px;
 }
@@ -742,14 +746,14 @@ html, body {
   display: inline-flex;
   align-items: center;
   flex-wrap: wrap;
-  gap: 6px;
+  gap: clamp(4px, 0.42vw, 6px);
   max-width: 100%;
   text-align: left;
 }
 .params-share:hover { opacity: 0.7; }
 
 .params-share-status {
-  font-size: 10px;
+  font-size: clamp(8px, 0.69vw, 10px);
   letter-spacing: 0.04em;
   opacity: 0.85;
   text-transform: uppercase;
