@@ -79,7 +79,7 @@ export default function LandingPage() {
 
 This project was inspired by something I noticed in my own work with motion graphics -- a shift to increasingly node-based, math-based, generated visuals and animation. I see this shift also happening in the design around me, shaping aesthetics into something closer to the ASCII style: a reflection of our moment, defined by AI and new interpretations to code, symbols, graphics, and information.
 
-Rerender is my playing with that shift while rebelling against it -- re-enforcing human participation.`}
+Rerender is me playing with that shift while rebelling against it -- re-enforcing human participation.`}
         </div>
 
         <div className="play-block">
